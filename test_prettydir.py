@@ -3,7 +3,7 @@ import pandas
 import pytest
 import prettydir
 
-def test_nomodule():
+def test_get_module():
     with pytest.raises(ModuleNotFoundError) as module:
         prettydir.get_module("something_something")
     
