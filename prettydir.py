@@ -1,12 +1,20 @@
 import sys
 import importlib
 
+def get_module(name):
+    try:
+        module = importlib.import_module(name)
+    except ModuleNotFoundError:
+        raise ModuleNotFoundError("check if the module is installed and try again!")
+    return module
+
 def main():
+    module = get_module(sys.argv[1])
+
     path = {"classes": [],
             "attributes": [],
             "methods": [],
             "dunder": []}
-    module = importlib.import_module(sys.argv[1])
     contents = [name for name in dir(module) if callable(getattr(module, name))]
     path['attributes'] = [name for name in dir(module) if not callable(getattr(module, name))]
     with open('directory.txt', 'w') as directory_file:
